@@ -43,8 +43,9 @@ def main():
             elif j == 0 and i == num_filas-1:
                 matriz_1[i][j] = 1
             elif 0 < j < num_variable_Z and i != num_filas - 1:
-                matriz_1[i][j] = float(input("Ingrese el coeficiente de la variable" + str(j) + "de la ecuación" + str(i + 1) +": " ))
-
+                matriz_1[i][j] = float(
+                    input("Ingrese el coeficiente de la variable" + str(j) + "de la ecuación" + str(i + 1) +": " ))
+            elif
 
 
 
