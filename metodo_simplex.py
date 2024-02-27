@@ -1,9 +1,8 @@
-global salidaaux
-salidaaux = 1
 matriz_1 = []
 matriz_2 = []
 lista = []
 respuestas = {}
+
 
 def ingresar_datos():
     global num_variable_Z
@@ -34,7 +33,7 @@ def encontrar_col_piv(matriz):
 def encontrar_elemento_piv(matriz):
     global fila_pivot
     num_menor = 100000
-    for i in range(num_filas -1):
+    for i in range(num_filas - 1):
         if matriz[i][colum_pivote] == 0 or matriz[i][num_colum -1] / matriz[i][colum_pivote] < 0:
             continue
         else:
@@ -62,9 +61,9 @@ def reorganizar_matriz(matriz_nueva):
 def negativos(matriz_nueva):
     negativo = None
     for i in range(num_colum-1):
-        if matriz_nueva[num_filas][i] < 0:
+        if matriz_nueva[num_filas - 1][i] < 0:
             salidaaux = 1
-            negativo = matriz_nueva[num_filas-1][i]
+            negativo = matriz_nueva[num_filas - 1][i]
         elif negativo == None:
             salidaaux = 0
     return salidaaux
@@ -77,6 +76,8 @@ def imprimir_matriz(matriz):
         print(tot)
     print()
 def main():
+    global salidaaux
+    salidaaux = 1
     ingresar_datos()
     for i in range(num_filas):
         if i < num_filas-i:
@@ -91,13 +92,13 @@ def main():
 
     for i in range(num_filas):
         for j in range(num_colum):
-            if j == 0 and i!= num_filas- 1:
+            if j == 0 and i != num_filas - 1:
                 matriz_1[i][j] = 0
-            elif j == 0 and i == num_filas-1:
+            elif j == 0 and i == num_filas - 1:
                 matriz_1[i][j] = 1
-            elif 0 < j < num_variable_Z and i != num_filas - 1:
+            elif 0 < j <= num_variable_Z and i != num_filas - 1:
                 matriz_1[i][j] = float(
-                    input("Ingrese el coeficiente de la variable" + str(j) + "de la ecuación" + str(i + 1) +": " ))
+                    input("Ingrese el coeficiente de la variable " + str(j) + "de la ecuación " + str(i + 1) +": " ))
             elif j == num_colum - 1 and i != num_filas - 1:
                 matriz_1[i][j] = float(
                     input("Digite el coeficiente al que esta igualado la ecuacion " + str(i + 1) + ": "))
@@ -111,12 +112,12 @@ def main():
                     matriz_1[i][j] = 1
                 else:
                     matriz_1[i][j] = 0
-
+    print(salidaaux)
     while salidaaux == 1:
         imprimir_matriz(matriz_1)
         encontrar_col_piv(matriz_1)
         global elemento_pivote
-        elemento_pivote = encontrar_col_piv(matriz_1)
+        elemento_pivote = encontrar_elemento_piv(matriz_1)
         fila_entrante(matriz_2, matriz_1)
         reorganizar_matriz(matriz_2)
         salidaaux = negativos(matriz_1)
